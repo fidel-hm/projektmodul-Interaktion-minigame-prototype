@@ -33,19 +33,11 @@ jobs:
 
       - name: Build web app
         run: python -m pygbag --build birth_lottery
-        continue-on-error: true
-
-      - name: Find build output
-        run: |
-          echo "=== all dirs ==="
-          find . -not -path "./.git/*" -type d | sort
-          echo "=== html files ==="
-          find . -not -path "./.git/*" -name "*.html" 2>/dev/null || echo "none"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build/web
+          path: birth_lottery/build/web
 
       - name: Deploy to GitHub Pages
         id: deployment
