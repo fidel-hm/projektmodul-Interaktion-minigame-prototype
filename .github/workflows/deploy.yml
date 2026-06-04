@@ -32,7 +32,12 @@ jobs:
         run: pip install pygbag
 
       - name: Build web app
-        run: pygbag --build birth_lottery
+        run: |
+          python -m pygbag --build birth_lottery
+          echo "--- build output ---"
+          find . -name "index.html" -not -path "./.git/*" 2>/dev/null || true
+          ls -la build/ 2>/dev/null || echo "no build/ dir"
+          ls -la build/web/ 2>/dev/null || echo "no build/web/ dir"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
